@@ -114,7 +114,7 @@ use ~/CNV_meth/data/DEEPSIGNAL/ as output folder
 
 ### CNV
 
-use ~/CNV_meth/Sscripts/CNV_meth_plot_healthy_and_cancers.R
+use ~/CNV_meth/scripts/CNV_meth_plot_healthy_and_cancers.R
 you can edit the script by specifing the tool used, or directly the folders containing .cnv_meth.R files
 ```
 
@@ -129,14 +129,14 @@ GEN <- makedata(paste("~/CNV_meth/data/", tool ,"/GENOME/",sep=""))
 
 ### 10MB bins
 
-use ~/CNV_meth/Sscripts/CNV_meth_plot_healthy_and_cancers.R
+use ~/CNV_meth/Scripts/CNV_meth_plot_cancers.R
 you can edit the script by specifing the tool used, or directly the folders containing .cnv_meth.R files
 ```
 
 tool = "DEEPSIGNAL"
 tool = "REMORA"
 
-PMD <- makedata(paste("~/CNV_meth/data/", tool ,"/PMD/",sep=""))
+PMD <- makedata(paste("~/CNV_meth/data/", tool ,"/PMD_CNV/",sep=""))
 GEN <- makedata(paste("~/CNV_meth/data/", tool ,"/GENOME/",sep=""))
 
 ```
