@@ -141,3 +141,5 @@ GEN <- makedata(paste("~/CNV_meth/data/", tool ,"/GENOME/",sep=""))
 
 ```
 
+he Genome_Biol_Data folder contains raw files from Katsman et al. to replicate and test the pipeline.
+The Genome_Biol_Data_analyzed the analysed data from Katsman et al.
