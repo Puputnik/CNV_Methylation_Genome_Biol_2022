@@ -1,7 +1,7 @@
 # CNV_Methylation_Genome_Biol_2022
 
 Requires:
-R packages: "liftOver","vroom","gwascat","tidyr"
+R packages: "liftOver", "vroom", "gwascat", "tidyr", "ggplot2", "ggbeeswarm", "ggpubr", "RColorBrewer"
 
 ## PMD and Genome average methylation calculation in 10MB bins and in Copy Number Altered regions 
 
@@ -114,4 +114,30 @@ use ~/CNV_meth/data/DEEPSIGNAL/ as output folder
 
 ### CNV
 
+use ~/CNV_meth/Sscripts/CNV_meth_plot_healthy_and_cancers.R
+you can edit the script by specifing the tool used, or directly the folders containing .cnv_meth.R files
+```
+
+tool = "DEEPSIGNAL"
+tool = "REMORA"
+
+PMD <- makedata(paste("~/CNV_meth/data/", tool ,"/PMD/",sep=""))
+GEN <- makedata(paste("~/CNV_meth/data/", tool ,"/GENOME/",sep=""))
+
+```
+
+
 ### 10MB bins
+
+use ~/CNV_meth/Sscripts/CNV_meth_plot_healthy_and_cancers.R
+you can edit the script by specifing the tool used, or directly the folders containing .cnv_meth.R files
+```
+
+tool = "DEEPSIGNAL"
+tool = "REMORA"
+
+PMD <- makedata(paste("~/CNV_meth/data/", tool ,"/PMD/",sep=""))
+GEN <- makedata(paste("~/CNV_meth/data/", tool ,"/GENOME/",sep=""))
+
+```
+
