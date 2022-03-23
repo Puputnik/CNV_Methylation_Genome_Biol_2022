@@ -1,15 +1,9 @@
 # CNV_Methylation_Genome_Biol_2022
 
+Requires:
+R packages: "liftOver","vroom","gwascat","tidyr"
 
-
-
-"liftOver","vroom","gwascat","tidyr"
-
-
-
-## Copy Number variation results pmd
-
-/usr/bin/Rscript /tank/USB/LIQUID_BIOPSY_MAIN_REVISION/SCRIPTS/CNV_meth_REMORA.R /tank/USB/LIQUID_BIOPSY_MAIN_REVISION/SCRIPTS/dict_chr.tsv /tank/USB3/FAST5_AMIR/REMORA/ISPRO.S1.meg242.remora1.edgefix.modbam2bed.5mC.cut0.667.hg38.bed     /tank/USB/LIQUID_BIOPSY_MAIN_REVISION/CNV_METH/SEGMENTATI/19_326.txt PMD_HMD/PMD_CNV/19_326.cnv_meth.R NO  /tank/USB3/FAST5_AMIR/PMD_HMD/solo_WCGW_inCommonPMDs.hg38.formatted.bed  &
+## PMD and Genome average methylation calculation in 10MB bins and in Copy Number Altered regions 
 
 put hg19 segmentation results from NanoGladiator in ~/CNV_meth/data/CNV/ 
 You can use any other software for CNV analysis as soon as you used hg19 as reference genome and the segmentation results files are tab separated files formatted in this way:
@@ -35,8 +29,11 @@ Y       59017656        59217656        3       Deletion        1       0.52    
 ```
 create a 2 column dict_chr.tsv file with:
 1) Contig in the reference used for methylation analysis
-2) Contig in ChrN format
+2) Contig in chrN format
 
+You can find the dict_chr.tsv files used for Katsman et al. in ~/CNV_meth/Utility/
+For Deepsignal methylation analysis we used GCF_000001405.39_GRCh38.p13 as reference genome.
+~/CNV_meth/Utility/dict_chr_DEEPSIGNAL.tsv
 ```
 NC_000001.11	chr1
 NC_000002.12	chr2
@@ -44,12 +41,15 @@ NC_000003.12	chr3
 ...
 NC_000024.10	chrY
 ```
-
-You can find the dict_chr.tsv file used for Katsman et al. in ~/CNV_meth/Utility/dict_chr.tsv
-For methylation analysis we used GCF_000001405.39_GRCh38.p13 as reference genome.
-
-
-
+For Remora contigs were already in chrN format:
+~/CNV_meth/Utility/dict_chr_REMORA.tsv
+```
+chr1	chr1
+chr2	chr2
+chr3	chr3
+...
+chrY	chrY
+```
 
 ### Remora methylation data
 
@@ -67,7 +67,7 @@ chr1	10562	10563	5mC	1000	+	10562	10563	0,0,0	1	100.00
 chr1	10576	10577	5mC	1000	+	10576	10577	0,0,0	1	100.00
 chr1	10578	10579	5mC	1000	+	10578	10579	0,0,0	1	0.00
 ```
-
+#### CNV and PMD
 To merge CNV and PMD methylation results use ~/CNV_meth/Scripts/CNV_meth_REMORA.R and provide as arguments in the following orders:
 1) dict_chr.tsv (see above)
 2) Remora methylation bed file
@@ -75,10 +75,10 @@ To merge CNV and PMD methylation results use ~/CNV_meth/Scripts/CNV_meth_REMORA.
 4) output name
 5) blacklist bed (hg19 format, not used for this analysis, just leave "NO")
 6) whitelist bed (hg38 format, not mandatory): for this analysis we used Partially Methylated Domains from XXXX et al. ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed . If you are not using a whitelist leave "NO"
-
-/usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed  ~/CNV_meth/data/CNV/sample.txt ~/CNV_meth/data/REMORA/PMD_CNV/sample.cnv_meth.R  NO  ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed  
-  
-  
+```
+/usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr_REMORA.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed  ~/CNV_meth/data/CNV/sample.txt ~/CNV_meth/data/REMORA/PMD_CNV/sample.cnv_meth.R  NO  ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed  
+```  
+#### Average methylation in PMD
 To calculate average methylation in PMD use ~/CNV_meth/Scripts/CNV_meth_REMORA.R and provide as arguments in the following orders:
 1) dict_chr.tsv (see above)
 2) Remora methylation bed file
@@ -86,16 +86,17 @@ To calculate average methylation in PMD use ~/CNV_meth/Scripts/CNV_meth_REMORA.R
 4) output name
 5) blacklist bed (hg19 format, not used for this analysis, just leave "NO")
 6) whitelist bed (hg38 format, not mandatory): for this analysis we used Partially Methylated Domains from XXXX et al. ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed . If you are not using a whitelist leave "NO"
-
-/usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed ~/CNV_meth/Utility/hg19_coordinates_total_formatted.txt ~/CNV_meth/data/REMORA/PMD/sample.cnv_meth.R  NO  ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed  
-  
+```
+/usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr_REMORA.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed ~/CNV_meth/Utility/hg19_coordinates_total_formatted.txt ~/CNV_meth/data/REMORA/PMD/sample.cnv_meth.R  NO  ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed  
+```
+#### Genome wide average methylation
 To calculate "genome wide" average methylation use ~/CNV_meth/Scripts/CNV_meth_REMORA.R as before, but use "NO" in the whitelist field
-  
-/usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed  ~/CNV_meth/Utility/hg19_coordinates_total_formatted.txt ~/CNV_meth/data/REMORA/GENOME/sample.cnv_meth.R   NO NO
-
+```
+/usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr_REMORA.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed  ~/CNV_meth/Utility/hg19_coordinates_total_formatted.txt ~/CNV_meth/data/REMORA/GENOME/sample.cnv_meth.R   NO NO
+```
 ### Deepsignal methylation data
 
-For Deepsignal results perform exactly the same steps but use ~/CNV_meth/Scripts/CNV_meth_DEEPSIGNAL.R
+For Deepsignal results perform exactly the same steps but use ~/CNV_meth/Scripts/CNV_meth_DEEPSIGNAL.R and ~/CNV_meth/Utility/dict_chr_DEEPSIGNAL.tsv
 put Deepsignal frequency.tsv files in ~/CNV_meth/data/DEEPSIGNAL/ 
 
 ```
@@ -109,8 +110,8 @@ NC_000010.11	72437128	-	61360293	0.175	0.825	1	0	1	1.0000	GCCCTTAACGCTTTTTC
 use ~/CNV_meth/data/DEEPSIGNAL/ as output folder
 
 
+## plots
 
-/tank/USB/LIQUID_BIOPSY_MAIN_REVISION/SCRIPTS/hg19_coordinates_total_formatted.txt
+### CNV
 
-
-
+### 10MB bins
