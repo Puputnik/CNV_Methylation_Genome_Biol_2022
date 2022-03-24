@@ -55,9 +55,6 @@ chrY	chrY
 
 ### Remora methylation data
 
-Create folders for subesequent analyses
-mkdir -p ~/CNV_meth/data/REMORA/PMD_CNV/
-
 Put hg38 remora methylation .bed files in ~/CNV_meth/data/REMORA/
 ```
 chr1	10470	10471	5mC	1000	+	10470	10471	0,0,0	1	0.00
@@ -70,6 +67,11 @@ chr1	10576	10577	5mC	1000	+	10576	10577	0,0,0	1	100.00
 chr1	10578	10579	5mC	1000	+	10578	10579	0,0,0	1	0.00
 ```
 #### CNV and PMD
+
+Create folders for output
+```
+mkdir -p ~/CNV_meth/data/REMORA/PMD_CNV/
+```
 To merge CNV and PMD methylation results use ~/CNV_meth/Scripts/CNV_meth_REMORA.R and provide as arguments in the following orders:
 1) dict_chr.tsv (see above)
 2) Remora methylation bed file
@@ -81,6 +83,11 @@ To merge CNV and PMD methylation results use ~/CNV_meth/Scripts/CNV_meth_REMORA.
 /usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr_REMORA.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed  ~/CNV_meth/data/CNV/sample.txt ~/CNV_meth/data/REMORA/PMD_CNV/sample.cnv_meth.R  NO  ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed  
 ```  
 #### Average methylation in PMD
+
+Create folders for output
+```
+mkdir -p ~/CNV_meth/data/REMORA/PMD/
+```
 To calculate average methylation in PMD use ~/CNV_meth/Scripts/CNV_meth_REMORA.R and provide as arguments in the following orders:
 1) dict_chr.tsv (see above)
 2) Remora methylation bed file
@@ -92,6 +99,11 @@ To calculate average methylation in PMD use ~/CNV_meth/Scripts/CNV_meth_REMORA.R
 /usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr_REMORA.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed ~/CNV_meth/Utility/hg19_coordinates_total_formatted.txt ~/CNV_meth/data/REMORA/PMD/sample.cnv_meth.R  NO  ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed  
 ```
 #### Genome wide average methylation
+Create folders for output
+```
+mkdir -p ~/CNV_meth/data/REMORA/GENOME/
+```
+
 To calculate "genome wide" average methylation use ~/CNV_meth/Scripts/CNV_meth_REMORA.R as before, but use "NO" in the whitelist field
 ```
 /usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr_REMORA.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed  ~/CNV_meth/Utility/hg19_coordinates_total_formatted.txt ~/CNV_meth/data/REMORA/GENOME/sample.cnv_meth.R   NO NO
