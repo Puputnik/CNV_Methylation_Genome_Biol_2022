@@ -124,8 +124,13 @@ colnames(summary) <- c("sample", "mean_delta_methylation", "standard_deviation")
 write.table(summary, file=paste("~/CNV_meth/summary_", tool ,"_persample.tsv",sep=""),quote = F, row.names = F, sep="\t")
 
 #### make summary with mean and sd per group
-can <- cnv$met[which(cnv$sample %in% c("BC09","BC08","19_326","BC01", "BC10","BC11") )]
+can <- cnv$met[which(cnv$sample %in% c("BC09","BC08","19_326","BC01", "BC10", "BC11") )]
 hea <- cnv$met[which(cnv$sample %in%  c("HU005_10", "HU005_11", "HU005_12","BC02","BC03","BC04","BC05") )]
+
+will = wilcox.test(x = can, y = hea,
+                   alternative = c("less"),
+                   mu = 0, paired = FALSE, exact = NULL, correct = TRUE,
+                   conf.int = FALSE, conf.level = 0.95)
 
 summary <- rbind(c("Cancers",mean(can, na.rm = T),sd(can, na.rm = T)), c("Healthy",mean(hea, na.rm = T), sd(hea, na.rm = T)))
 colnames(summary) <- c("group", "mean_delta_methylation", "standard_deviation")
