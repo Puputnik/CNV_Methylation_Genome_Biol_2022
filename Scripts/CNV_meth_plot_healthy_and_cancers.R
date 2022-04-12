@@ -108,6 +108,29 @@ for (s in sampi){
 }
 table(tar$avg, tar$sample)
 cnv$met <- cnv$met - tar$avg
+
+#### make summary with mean and sd per sample
+samps <- c()
+mea <- c()
+sdv <- c()
+for (s in unique(cnv$sample)){
+  cnvs <- subset(cnv, cnv$sample == s)
+  mea <- c(mea, mean(as.numeric(cnvs$met), na.rm = T))
+  sdv <- c(sdv, sd(as.numeric(cnvs$met), na.rm = T))
+  samps <- c(samps, s)
+}
+summary <- cbind(samps, mea, sdv)
+colnames(summary) <- c("sample", "mean_delta_methylation", "standard_deviation")
+write.table(summary, file=paste("~/CNV_meth/summary_", tool ,"_persample.tsv",sep=""),quote = F, row.names = F, sep="\t")
+
+#### make summary with mean and sd per group
+can <- cnv$met[which(cnv$sample %in% c("BC09","BC08","19_326","BC01", "BC10","BC11") )]
+hea <- cnv$met[which(cnv$sample %in%  c("HU005_10", "HU005_11", "HU005_12","BC02","BC03","BC04","BC05") )]
+
+summary <- rbind(c("Cancers",mean(can, na.rm = T),sd(can, na.rm = T)), c("Healthy",mean(hea, na.rm = T), sd(hea, na.rm = T)))
+colnames(summary) <- c("group", "mean_delta_methylation", "standard_deviation")
+write.table(summary, file=paste("~/CNV_meth/summary_", tool ,"_pergroup.tsv",sep=""),quote = F, row.names = F, sep="\t")
+
 printing(cnv, outname)
 
 
