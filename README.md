@@ -78,7 +78,7 @@ To merge CNV and PMD methylation results use ~/CNV_meth/Scripts/CNV_meth_REMORA.
 3) Segmentation results (hg19 format)
 4) output name
 5) blacklist bed (hg19 format, not used for this analysis, just leave "NO")
-6) whitelist bed (hg38 format, not mandatory): for this analysis we used Partially Methylated Domains from XXXX et al. ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed . If you are not using a whitelist leave "NO"
+6) whitelist bed (hg38 format, not mandatory): for this analysis we used Partially Methylated Domains from Zhou et al. (2018) 10.1038/s41588-018-0073-4 ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed . If you are not using a whitelist leave "NO"
 ```
 /usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr_REMORA.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed  ~/CNV_meth/data/CNV/sample.txt ~/CNV_meth/data/REMORA/PMD_CNV/sample.cnv_meth.R  NO  ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed  
 ```  
@@ -94,7 +94,7 @@ To calculate average methylation in PMD use ~/CNV_meth/Scripts/CNV_meth_REMORA.R
 3) 10MB genome bins (hg19 format), you can find the file used for Katsman et al. in ~/CNV_meth/Utility/hg19_coordinates_total_formatted.txt
 4) output name
 5) blacklist bed (hg19 format, not used for this analysis, just leave "NO")
-6) whitelist bed (hg38 format, not mandatory): for this analysis we used Partially Methylated Domains from XXXX et al. ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed . If you are not using a whitelist leave "NO"
+6) whitelist bed (hg38 format, not mandatory): for this analysis we used Partially Methylated Domains from Zhou et al. (2018) 10.1038/s41588-018-0073-4 ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed . If you are not using a whitelist leave "NO"
 ```
 /usr/bin/Rscript ~/CNV_meth/Scripts/CNV_meth_REMORA.R ~/CNV_meth/Utility/dict_chr_REMORA.tsv ~/CNV_meth/data/REMORA/sample.remora.hg38.bed ~/CNV_meth/Utility/hg19_coordinates_total_formatted.txt ~/CNV_meth/data/REMORA/PMD/sample.cnv_meth.R  NO  ~/CNV_meth/Utility/solo_WCGW_inCommonPMDs.hg38.formatted.bed  
 ```
