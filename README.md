@@ -4,10 +4,12 @@ Requires R packages: "liftOver", "vroom", "gwascat", "tidyr", "ggplot2", "ggbees
 
 ## PMD and Genome average methylation calculation in 10MB bins and in Copy Number Altered regions 
 
-To download segmentation results, remora and deepsignal methylation raw files refere to Katsman et al publication.
-The Genome_Biol_Data_analyzed folder contains the analysed data from Katsman et al.
+Rename the folder containing this README file as CNV_meth and put it in your home.
 
-Put hg19 segmentation results from NanoGladiator in ~/CNV_meth/data/CNV/ 
+To download remora and deepsignal methylation raw files refere to Katsman et al publication.
+The Genome_Biol_Data_analyzed folder contains the analysed data from Katsman et al. including segmentation results from NanoGladiator
+
+Put hg19 segmentation results from NanoGladiator in ~/CNV_meth/data/CNV/
 You can use any other software for CNV analysis as soon as you used hg19 as reference genome and the segmentation results files are tab separated files formatted in this way:
 
 1) contig
