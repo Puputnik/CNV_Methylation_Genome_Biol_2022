@@ -4,7 +4,11 @@ Requires R packages: "liftOver", "vroom", "gwascat", "tidyr", "ggplot2", "ggbees
 
 ## PMD and Genome average methylation calculation in 10MB bins and in Copy Number Altered regions 
 
-Rename the folder containing this README file as CNV_meth and put it in your home.
+Rename the folder containing this README file as "CNV_meth" and put it in your home.
+
+```
+mv CNV_Methylation_Genome_Biol_2022 ~/CNV_meth/
+```
 
 To download remora and deepsignal methylation raw files refere to Katsman et al publication.
 The Genome_Biol_Data_analyzed folder contains the analysed data from Katsman et al. including segmentation results from NanoGladiator
