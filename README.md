@@ -13,6 +13,8 @@ mv CNV_Methylation_Genome_Biol_2022 ~/CNV_meth/
 To download remora and deepsignal methylation raw files refere to Katsman et al publication.
 The Genome_Biol_Data_analyzed folder contains the analysed data from Katsman et al. including segmentation results from NanoGladiator
 
+NOTE: CNV_meth_plot_cancers.R and CNV_meth_plot_healthy_and_cancers.R scripts require that the file IDs are provided in the same format as Katsman et al. (see Genome_Biol_Data_Analysed folder). If you intend to use custom/additional IDs for your own samples you should edit them as described in the "plots" section. 
+
 Put hg19 segmentation results from NanoGladiator in ~/CNV_meth/data/CNV/
 You can use any other software for CNV analysis as soon as you used hg19 as reference genome and the segmentation results files are tab separated files formatted in this way:
 
@@ -134,7 +136,8 @@ use ~/CNV_meth/data/DEEPSIGNAL/ as output folder
 
 ## plots
 
-### CNV
+
+### 10MB bins
 
 use ~/CNV_meth/scripts/CNV_meth_plot_healthy_and_cancers.R
 you can edit the script by specifing the tool used, or directly the folders containing .cnv_meth.R files
@@ -148,8 +151,32 @@ GEN <- makedata(paste("~/CNV_meth/data/", tool ,"/GENOME/",sep=""))
 
 ```
 
+If you want to use use custom IDs for your own samples you should:
 
-### 10MB bins
+Specify IDs of the whole case series, and of cancer and healthy samples at:
+
+lines 38-40
+```
+healthies <- c("HU005_10", "HU005_11", "HU005_12","BC02","BC03","BC04","BC05")
+cancers <- c("BC09","BC08","19_326","BC01", "BC10","BC11")
+tot_samps <- c("HU005_10", "HU005_11", "HU005_12","BC02","BC03","BC04","BC05","BC09","BC08","19_326","BC01", "BC10","BC11")
+```
+
+and lines 127-128
+```
+can <- cnv$met[which(cnv$sample %in% c("BC09","BC08","19_326","BC01", "BC10", "BC11") )]
+hea <- cnv$met[which(cnv$sample %in%  c("HU005_10", "HU005_11", "HU005_12","BC02","BC03","BC04","BC05") )]
+```
+
+Specify samples with low and high tumor fraction at:
+
+lines 69-90
+```
+cancers_low <- c("BC09","BC08")
+cancers_high <- c("19_326","BC01","BC10","BC11")
+```
+
+### CNV
 
 use ~/CNV_meth/Scripts/CNV_meth_plot_cancers.R
 you can edit the script by specifing the tool used, or directly the folders containing .cnv_meth.R files
@@ -163,4 +190,14 @@ GEN <- makedata(paste("~/CNV_meth/data/", tool ,"/GENOME/",sep=""))
 
 ```
 
+If you want to use use custom IDs for your own samples you should:
 
+Specify IDs of the whole case series, and of cancer and healthy samples at line 27
+```
+cnv <- subset(cnv, cnv$sample %in% c( "BC09" , "BC08" ,"19_326","BC01",  "BC10"  , "BC11" ))
+```
+
+Specify the printing order at line 30
+```
+cnv$sample = factor(cnv$sample, levels = c( "BC09" , "BC08" ,"19_326","BC01",  "BC10"  , "BC11" ))
+```
