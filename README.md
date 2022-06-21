@@ -192,7 +192,7 @@ GEN <- makedata(paste("~/CNV_meth/data/", tool ,"/GENOME/",sep=""))
 
 If you want to use use custom IDs for your own samples you should:
 
-Specify IDs of the whole case series, and of cancer and healthy samples at line 27
+Specify IDs of the cancer samples at line 27
 ```
 cnv <- subset(cnv, cnv$sample %in% c( "BC09" , "BC08" ,"19_326","BC01",  "BC10"  , "BC11" ))
 ```
